@@ -6,6 +6,21 @@
 
 var GCODE = {};
 
+var getUrlParameter = function getUrlParameter(sParam) {
+	var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		sURLVariables = sPageURL.split('&'),
+		sParameterName,
+		i;
+
+	for (i = 0; i < sURLVariables.length; i++) {
+		sParameterName = sURLVariables[i].split('=');
+
+		if (sParameterName[0] === sParam) {
+			return sParameterName[1] === undefined ? true : sParameterName[1];
+		}
+	}
+};
+
 GCODE.ui = (function(){
     var reader;
     var myCodeMirror;
@@ -171,6 +186,33 @@ GCODE.ui = (function(){
 
         document.getElementById('list').innerHTML =  resultSet.join('');
     };
+
+	var handleAutoFileSelect = function() {
+
+		var localFile = getUrlParameter('file');
+		$.ajax({ url: localFile, processData: false, mimeType: "text/plain", dataType:"text", success: function(f) {
+			var file = new File([f], "./tmp", {type: "text/plain", lastModified: Date.now()});
+		
+            reader = new FileReader();
+            reader.onload = function(theFile){
+                chooseAccordion('progressAccordionTab');
+                setProgress('loadProgress', 0);
+                setProgress('analyzeProgress', 0);
+//                myCodeMirror.setValue(theFile.target.result);
+                GCODE.gCodeReader.loadFile(theFile);
+                if(showGCode){
+                    myCodeMirror.setValue(theFile.target.result);
+                }else{
+                    myCodeMirror.setValue("GCode view is disabled. You can enable it in 'GCode analyzer options' section.")
+                }
+
+            };
+            reader.readAsText(file);
+			     }
+	   });
+
+    };
+
 
     var handleFileSelect = function(evt) {
 //        console.log("handleFileSelect");
@@ -361,6 +403,9 @@ GCODE.ui = (function(){
             dropZone.addEventListener('drop', handleFileSelect, false);
 
             document.getElementById('file').addEventListener('change', handleFileSelect, false);
+            window.addEventListener('load', handleAutoFileSelect, false);
+//            handleAutoFileSelect2();
+			
 
             setProgress('loadProgress', 0);
             setProgress('analyzeProgress', 0);
@@ -497,4 +542,5 @@ GCODE.ui = (function(){
             }
         }
     }
+
 }());

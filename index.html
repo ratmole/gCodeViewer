@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>gcode viewer - online gcode viewer and analyzer in your browser!</title>
-    <meta name="description" content="Visual GCode viewer and analyzer in your browser. No need to upload you GCode anywhere, everything is done locally." />
-    <meta name="keywords" content="GCode,g-code,viewer,online,javascript" />
+    <title>gcode viewer - offline gcode viewer and analyzer in your browser!</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="language" content="english" />
-
-    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
-    <link rel="meta" type="application/rdf+xml" title="Dublin" href="/dublin.rdf" />
-    <link rel="canonical" href="http://gcode.ws/" />
-
 
     <link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.9.0.custom.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen" />
@@ -33,37 +25,11 @@
     <script type="text/javascript" src="js/analyzer.js"></script>
     <script type="text/javascript" src="js/renderer3d.js"></script>
 
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-38437619-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-    </script>
-
-    <meta property="og:title" content="gCodeViewer - online gcode viewer and analyzer!" />
+    <meta property="og:title" content="gCodeViewer - offline gcode viewer and analyzer!" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://gcode.ws" />
-    <meta property="og:image" content="http://gcode.ws/screenshot.jpg" />
-    <meta property="og:site_name" content="Online GCode Viewer" />
-    <meta property="fb:admins" content="1537520789" />
 
 </head>
 <body>
-<div id="fb-root"></div>
-<script type="text/javascript">(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=122261684619414";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 <div id="analysisModal" class="modal hide fade">
     <div class="modal-header">
@@ -79,40 +45,10 @@
     </div>
 </div>
 
-<div class="navbar navbar-static-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <ul class="nav">
-                <li >
-                    <a class="brand" href="#">GCode Viewer</a>
-                </li>
-            </ul>
-            <ul class="nav pull-right">
-                <li class="dropdown">
-                    <a href="#"
-                       class="dropdown-toggle"
-                       data-toggle="dropdown">
-                        Spread the word
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="socials">
-                            <div class="g-plusone" data-annotation="inline" data-width="150"></div>
-                        </li>
-                        <li class="socials"><div class="fb-like" data-href="http://gcode.ws" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-action="recommend"></div></li>
-                        <li class="socials"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://gcode.ws" data-text="Check out a nice online gcode viewer!">Tweet</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
 
 <div id="wrap" class="ui-widget ui-widget-content ui-corner-all">
     <div id="control">
-        <img src="img/logo.png" alt="gCodeViewer - an online gcode viewer"/>
+        <img src="img/logo.png" alt="gCodeViewer - an offline gcode viewer"/>
 
         <div id="accordion2" class="accordion">
             <div class="accordion-group">
@@ -124,6 +60,7 @@
                 <div id="fileAccordionTab" class="accordion-body collapse">
                     <div class="accordion-inner">
                         <input type="file" id="file" name="files" />
+                        <input type="hidden" id="autoLoad" name="autoLoad" />
                         <!--<form class="add-teacher" id="fAddTeacher" enctype="multipart/form-data" method="post" novalidate="novalidate">-->
                         <!--<button id="selectFileButton">Select GCode File</button>-->
                         <!--</form>-->
@@ -315,14 +252,6 @@
 </div>
 <script>
     GCODE.ui.initHandlers();
-</script>
-
-<script type="text/javascript">
-    (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
 </script>
 
 </body>
