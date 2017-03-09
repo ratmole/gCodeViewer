@@ -1,3 +1,13 @@
+Modified version of gCodeVisualizer in order to be used with slic3r to estimate the print time without internet access.
+
+Just Download it,
+edit the estimate.bat or estimate.sh script to match your path, and add to slic3r:
+Print Settings->Output Options->Post-processing-scripts: [the path of the .bat or .sh script] 
+[Linux example] /home/username/gCodeViewer/estimate.sh
+[Windows Example] C:\dev\gCodeViewer\esimate.bat
+
+
+
 gCodeVisualizer - a web-based visual gcode viewer and analyzer.
 Available online at http://gcode.ws/
 
